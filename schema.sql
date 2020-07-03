@@ -1,4 +1,4 @@
--- Drop the ';breweries tabl eif it exists
+-- Drop the 'breweries' table if it exists
 DROP TABLE IF EXISTS breweries;
 
 -- Create the 'breweries' table
