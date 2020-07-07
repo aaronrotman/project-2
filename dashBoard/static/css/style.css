@@ -1,0 +1,57 @@
+
+html {
+    height: 100%;
+    background: #000000 url("../img/HollidaySurf.jpg") no-repeat bottom left;
+    background-size: 100% 100%;
+    overflow: hidden;
+    color: white;
+    position: center;
+  }
+  /* giving navbar transparent background */
+  body, .navbar {
+    background-color: transparent;
+  }
+  /* making navbar li inline-block element */
+.navbar li {
+  display: inline-block;
+  padding: 20x;
+  margin-right: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 3px;
+}
+/* dropdown links style */
+.navbar li a {
+  color: whitesmoke;
+  font-size: larger;
+  font-style: oblique;
+  background-color: tomato;
+}
+
+/* "come explore some beers"adding transparent background and opacity for style */
+  .jumbotron {
+    background: transparent;
+    /* background: white;
+    opacity: .1; */
+    margin: 0;
+    padding: 0;
+  }
+
+  .jumbotron h3, .jumbotron h2{
+    color: white;
+  }
+
+  .container{
+
+  }
+  
+  .box{
+    color: white;
+    position: relative;
+    /* margin-right: 1px; */
+    font-size: ;
+  }
+  .btn{
+    color: white
+  }
