@@ -1,8 +1,11 @@
 # __pycache__
 __pycache__
 
-# config.py
+# config.js
 config.js
 
 # .ipynb Checkpoints
 .ipynb_checkpoints
+
+# config.py
+config.py
