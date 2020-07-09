@@ -10,11 +10,13 @@ import pandas as pd
 from flask import Flask, jsonify, render_template
 import json
 import csv
+
 # Python SQL toolkit and Object Relational Mapper
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func, inspect
+
 # Instantiate Flask
 app = Flask(__name__)
 
@@ -50,12 +52,13 @@ def index():
         """)
 
 
-# Simple route to test functionality
+# Endpoint that returns beer statistics data for all 50 US states
 @app.route('/api/v1.0/states')
 def states():
     print("Received request for 'testing' route")
-
+    # Create a new session
     session = Session(engine)
+    # Query the database
     states = session.query(
         beer_stats.state, 
         beer_stats.abbr, 
@@ -67,29 +70,37 @@ def states():
         beer_stats.beer_tax_per_gallon,
         beer_stats.beer_tax_rank
         )
+    # Close the session
     session.close()
+
+    # List to store a dictionary for each state's statistics
     state_list = []
+
+    # Create a dictionary of beer statistics data for each state and add them to the list of state dictionaries
     for state, abbr, per_cap_consumption, total_consumption, five_year_change, bar_rest_per_100k, br_rank, beer_tax_per_gallon, beer_tax_rank in states:
         state_dict = {}
         state_dict["state"] = state
         state_dict["abreviation"] = abbr
         state_dict["pc_consumption"] = per_cap_consumption
-        state_dict["total_sonsumption"] = total_consumption
+        state_dict["total_consumption"] = total_consumption
         state_dict["five_year_change"] = five_year_change
         state_dict["br_per_100"] = bar_rest_per_100k
         state_dict["br_rank"] = br_rank
         state_dict["tax_per_gallon"] = beer_tax_per_gallon
         state_dict["tax_rank"] = beer_tax_rank
         state_list.append(state_dict)
+    
+    # Return the results in JSON format
     return jsonify(state_list)
 
-# Another route to test functionality
+# Endpoint that returns beer statistics data for a single US state
 @app.route('/api/v1.0/by_state/<state_name>')
 def by_state(state_name):
     print("Received request for 'more-testing' route")
 
-    
+    # Create a new session
     session = Session(engine)
+    # Query the database
     states = session.query(
         beer_stats.state, 
         beer_stats.abbr, 
@@ -102,20 +113,27 @@ def by_state(state_name):
         beer_stats.beer_tax_rank
         ).\
         filter(beer_stats.state == state_name).all()
+    # Close the session
     session.close()
+
+    # List to store a dictionary for a specific state's statistics
     state_list = []
+
+    # Create a dictionary of beer statistics data for a specific state and add it to the list of state dictionaries
     for state, abbr, per_cap_consumption, total_consumption, five_year_change, bar_rest_per_100k, br_rank, beer_tax_per_gallon, beer_tax_rank in states:
         state_dict = {}
         state_dict["state"] = state
         state_dict["abreviation"] = abbr
         state_dict["pc_consumption"] = per_cap_consumption
-        state_dict["total_sonsumption"] = total_consumption
+        state_dict["total_consumption"] = total_consumption
         state_dict["five_year_change"] = five_year_change
         state_dict["br_per_100"] = bar_rest_per_100k
         state_dict["br_rank"] = br_rank
         state_dict["tax_per_gallon"] = beer_tax_per_gallon
         state_dict["tax_rank"] = beer_tax_rank
         state_list.append(state_dict)
+    
+    # Return the results in JSON format
     return jsonify(state_list)
 
 # Include at bottom of script
