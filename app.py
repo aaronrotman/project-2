@@ -7,15 +7,14 @@ api_version = "v1.0"
 #Postgres credentials
 from config import username, password
 import pandas as pd
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify
 import json
-import csv
 
 # Python SQL toolkit and Object Relational Mapper
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, func, inspect
+from sqlalchemy import create_engine
 
 # Instantiate Flask
 app = Flask(__name__)
@@ -29,6 +28,8 @@ Base = automap_base()
 
 # Reflect the tables
 Base.prepare(engine, reflect=True)
+
+# Store the beer stats table
 beer_stats = Base.classes.beer_stats
 
 # Index route
@@ -37,25 +38,23 @@ def index():
     print("Received request for index route")
     return(
         """
-        Welcome to our beer data API.
-        <br><br>
-        Available Routes:
-        <br><br>
-        /api/v1.0/states
-        <br>
-        <a href="/api/v1.0/states">View 'States' endpoint</a> 
-        <br><br>
-        /api/v1.0/by_state/<state_name>
-        <br>
-        <a href="/api/v1.0/by_state/California">Test endpoint for 'California'</a> 
-        <br>
-        """)
-
+        <h1>Welcome to the US Beer Consumption Data API.</h1>
+        <p>Version: v1.0</p>
+        <hr>
+        <h2>The following routes are available:</h2>
+        <h3>Endpoint for all US states:</h3>
+        <p>/api/v1.0/states</P>
+        <a href="/api/v1.0/us_states">View endpoint</a>
+        <h3>Endpoint for a single US state:</h3>
+        <p>/api/v1.0/by_state/<state_name></p>
+        <a href="/api/v1.0/by_state/California">View endpoint</a> 
+        """
+        )
 
 # Endpoint that returns beer statistics data for all 50 US states
-@app.route('/api/v1.0/states')
+@app.route(f'/api/{api_version}/us_states')
 def states():
-    print("Received request for 'testing' route")
+    print("Received request for 'us_states' route")
     # Create a new session
     session = Session(engine)
     # Query the database
@@ -94,9 +93,9 @@ def states():
     return jsonify(state_list)
 
 # Endpoint that returns beer statistics data for a single US state
-@app.route('/api/v1.0/by_state/<state_name>')
+@app.route(f'/api/{api_version}/by_state/<state_name>')
 def by_state(state_name):
-    print("Received request for 'more-testing' route")
+    print(f"Received request for single state route for state: {state_name}")
 
     # Create a new session
     session = Session(engine)
