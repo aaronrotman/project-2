@@ -38,7 +38,7 @@ def index():
     print("Received request for index route")
     return(
         """
-        <h1>Welcome to the US Beer Consumption Data API.</h1>
+        <h1>Welcome to the US Beer Consumption API!</h1>
         <p>Version: v1.0</p>
         <hr>
         <h2>The following routes are available:</h2>
@@ -59,6 +59,7 @@ def states():
     session = Session(engine)
     # Query the database
     states = session.query(
+        beer_stats.id,
         beer_stats.state, 
         beer_stats.abbr, 
         beer_stats.per_cap_consumption, 
@@ -76,8 +77,9 @@ def states():
     state_list = []
 
     # Create a dictionary of beer statistics data for each state and add them to the list of state dictionaries
-    for state, abbr, per_cap_consumption, total_consumption, five_year_change, bar_rest_per_100k, br_rank, beer_tax_per_gallon, beer_tax_rank in states:
+    for id, state, abbr, per_cap_consumption, total_consumption, five_year_change, bar_rest_per_100k, br_rank, beer_tax_per_gallon, beer_tax_rank in states:
         state_dict = {}
+        state_dict["id"] = id
         state_dict["state"] = state
         state_dict["abreviation"] = abbr
         state_dict["pc_consumption"] = per_cap_consumption
@@ -101,6 +103,7 @@ def by_state(state_name):
     session = Session(engine)
     # Query the database
     states = session.query(
+        beer_stats.id,
         beer_stats.state, 
         beer_stats.abbr, 
         beer_stats.per_cap_consumption, 
@@ -119,8 +122,9 @@ def by_state(state_name):
     state_list = []
 
     # Create a dictionary of beer statistics data for a specific state and add it to the list of state dictionaries
-    for state, abbr, per_cap_consumption, total_consumption, five_year_change, bar_rest_per_100k, br_rank, beer_tax_per_gallon, beer_tax_rank in states:
+    for id, state, abbr, per_cap_consumption, total_consumption, five_year_change, bar_rest_per_100k, br_rank, beer_tax_per_gallon, beer_tax_rank in states:
         state_dict = {}
+        state_dict["id"] = id
         state_dict["state"] = state
         state_dict["abreviation"] = abbr
         state_dict["pc_consumption"] = per_cap_consumption
