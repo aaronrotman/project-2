@@ -1,5 +1,5 @@
 # Database username
-username = "postgres"
+username = "YOUR USERNAME HERE"
 
 # Database password
-password = "postgres"
+password = "YOUR PASSWORD HERE"
