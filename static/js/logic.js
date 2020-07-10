@@ -34,6 +34,41 @@ var map = L.map("map-id", {
 // Add our 'lightmap' tile layer to the map
 lightmap.addTo(map);
 
+//ISSUE: colors not pulling into legend, colors need to be updated to match markers
+function getColor(d) {
+  return d === 'Micro'  ? "#de2d26" :
+         d === 'Regional'  ? "#377eb8" :
+         d === 'Large' ? "#4daf4a" :
+         d === 'Planning' ? "#FF0000" :
+         d === 'Brewpub' ? "#00FF00" :
+         d === 'Contract' ? "#0000FF" :
+         d === 'Other' ? "#000000" :
+                      "#ff7f00";
+}
+
+// Create a legend to display information about our map
+var legend = L.control({position: "bottomright"});
+
+// When the layer control is added, insert a div with the class of "info legend"
+legend.onAdd = function (map) {
+  var div = L.DomUtil.create('div', 'info legend');
+  labels = [''],
+  bType = ['Micro', 'Regional', 'Large', 'Planning', 'Brewpub', 'Contract', 'Other'];
+  // colors = ["yellow", "violet", "cyan", "red", "green", "blue", "black"];
+
+      // Looping through
+  for (var i = 0; i < bType.length; i++) {
+        div.innerHTML +=
+        labels.push(
+          '<i style="background: ' + getColor(bType[i]) + '"></i> ' +
+          (bType[i] ? bType[i] + '<br>' : '+'));
+      }
+      div.innerHTML = labels.join('<br>');
+  return div;
+};
+// Add the info legend to the map
+legend.addTo(map);
+
 // // Create an overlays object to add to the layer control
 var overlays = {
   "Micro": layers.MICRO,
