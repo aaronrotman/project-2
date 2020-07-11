@@ -35,34 +35,34 @@ var map = L.map("map-id", {
 lightmap.addTo(map);
 
 //ISSUE: colors not pulling into legend, colors need to be updated to match markers
-function getColor(d) {
-  return d === 'Micro'  ? "#de2d26" :
-         d === 'Regional'  ? "#377eb8" :
-         d === 'Large' ? "#4daf4a" :
-         d === 'Planning' ? "#FF0000" :
-         d === 'Brewpub' ? "#00FF00" :
-         d === 'Contract' ? "#0000FF" :
-         d === 'Other' ? "#000000" :
-                      "#ff7f00";
-}
+// function getColor(d) {
+//   return d === 'Micro'  ? "#de2d26" :
+//          d === 'Regional'  ? "#377eb8" :
+//          d === 'Large' ? "#4daf4a" :
+//          d === 'Planning' ? "#FF0000" :
+//          d === 'Brewpub' ? "#00FF00" :
+//          d === 'Contract' ? "#0000FF" :
+//          d === 'Other' ? "#000000" :
+//                       "#ff7f00";
+// }
 
 // Create a legend to display information about our map
 var legend = L.control({position: "bottomright"});
-
+colors = ["orange", "violet", "cyan", "red", "green", "blue", "black"]
 // When the layer control is added, insert a div with the class of "info legend"
 legend.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'info legend');
   labels = [''],
   bType = ['Micro', 'Regional', 'Large', 'Planning', 'Brewpub', 'Contract', 'Other'];
-  // colors = ["yellow", "violet", "cyan", "red", "green", "blue", "black"];
 
       // Looping through
   for (var i = 0; i < bType.length; i++) {
         div.innerHTML +=
         labels.push(
-          '<i style="background: ' + getColor(bType[i]) + '"></i> ' +
-          (bType[i] ? bType[i] + '<br>' : '+'));
-      }
+          // '<i style="background: ' + getColor(bType[i]) + '"></i> ' +
+          // (bType[i] ? bType[i] + '<br>' : '+'));
+          `<h3 style="background:${colors[i]}">${bType[i]}</h3><br>`
+        )}
       div.innerHTML = labels.join('<br>');
   return div;
 };
@@ -163,7 +163,8 @@ d3.json(url, function(response) {
     });
     newMarker.addTo(layers[breweryType]);
     
-    newMarker.bindPopup("<h3>" + response[i].name + "<h3><h3> City: " + response[i].city  + "</h3>").addTo(map);
+    newMarker.bindPopup("<h3>" + response[i].name + "</h3> <hr> <h3> City: " + response[i].city  + "</h3><h3> Phone: " + response[i].phone + "</h3><h3>" + `<a href="${response[i].website_url}" target="_blank">Website</a>` + "</h3>").addTo(map);
+
        
   }
 })

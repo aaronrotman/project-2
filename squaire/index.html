@@ -1,13 +1,20 @@
 <!doctype html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta property="og:description" content="Square bin map showing Beer Stats by State" />
+		<!-- RF Style and Link to bootstrap and D3 -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<script src="https://d3js.org/d3.v4.min.js"></script>
 		<title>Squaire.js</title>
 	    <meta name="title" content="Squaire.js" />
 	
-	    <meta property="og:description" content="Square bin map showing Beer Stats by State" />
+
 
 		
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -17,7 +24,40 @@
 	
 	</head>
 	<body>
-	
+		  <!-- RF Navagation bar, currently transparent  -->
+		<nav class="navbar navbar-expand-lg navbar-dark ">
+			<a class="navbar-brand" href="../dashBoard/dIndex.html">HOME</a>
+			<button class="navbar-toggler" 
+					type="button" 
+					data-toggle="collapse" 
+					data-target="#navbarSupportedContent" 
+					aria-controls="navbarSupportedContent" 
+					aria-expanded="false" 
+					aria-label="Toggle navigation">
+			</button>
+				<li class="nav-item dropdown">
+				  <a class="nav-link dropdown-toggle" 
+					  href="#" 
+					  id="navbarDropdown" 
+					  role="button" 
+					  data-toggle="dropdown" 
+					  aria-haspopup="true" 
+					  aria-expanded="false">
+					Maps and Content
+				  </a>
+				  <div class="dropdown-menu" 
+						aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" 
+						href="../index.html">Heat Map</a>
+					<a class="dropdown-item" 
+						href="../indexMarkers.html">Brewery Map</a>
+					<a class="dropdown-item" 
+						href="squaire/index.html">Squaire</a>
+				  </div>
+				</li>
+			  </ul>
+			</div>
+		  </nav>
         <div class="container">
 	
 			<header>
