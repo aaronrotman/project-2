@@ -43,7 +43,7 @@ def index():
         <hr>
         <h2>The following routes are available:</h2>
         <h3>Endpoint for all US states:</h3>
-        <p>/api/v1.0/states</P>
+        <p>/api/v1.0/us_states</P>
         <a href="/api/v1.0/us_states">View endpoint</a>
         <h3>Endpoint for a single US state:</h3>
         <p>/api/v1.0/by_state/<state_name></p>
