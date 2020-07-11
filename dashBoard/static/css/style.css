@@ -42,8 +42,10 @@ html {
     color: white;
   }
 
-  .container{
-
+  .post_content {
+    font-size: xx-large;
+    text-align: center;
+    opacity: 0.2;
   }
   
   .box{
